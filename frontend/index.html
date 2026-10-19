@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusBridge | Smart Campus Platform</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">CB</div>
+
+                <div>
+                    <h1>CampusBridge</h1>
+                    <p>SMART CAMPUS PLATFORM</p>
+                </div>
+            </div>
+
+            <div class="nav-label">WORKSPACE</div>
+
+            <nav class="navigation">
+                <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="#lost-found" class="nav-link" data-page="lost-found">
+                    <span>⌕</span> Lost & Found
+                </a>
+
+                <a href="#maintenance" class="nav-link" data-page="maintenance">
+                    <span>🔧</span> Campus Issues
+                </a>
+
+                <a href="#resource-exchange" class="nav-link" data-page="resource-exchange">
+                    <span>⇄</span> Resource Exchange
+                </a>
+
+                <a href="#about" class="nav-link" data-page="about">
+                    <span>✦</span> About CampusBridge
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="status-indicator"></div>
+                <div>
+                    <strong>CampusBridge API</strong>
+                    <p id="api-status">Checking connection...</p>
+                </div>
+            </div>
+        </aside>
+
+
+        <!-- Main content -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">CAMPUS INTELLIGENCE</p>
+                    <h2 id="page-title">Dashboard</h2>
+                </div>
+
+                <button type="button" class="primary-button" id="new-report-button">
+                    + New report
+                </button>
+            </header>
+
+
+            <!-- Dashboard page -->
+            <section id="dashboard-page" class="page active-page">
+
+                <div class="welcome-banner">
+                    <div class="welcome-content">
+                        <span class="welcome-tag">YOUR CAMPUS, CONNECTED</span>
+
+                        <h2>A smarter campus<br>starts with us.</h2>
+
+                        <p>
+                            Connect campus communities, recover lost belongings,
+                            and turn everyday reports into useful insights.
+                        </p>
+
+                        <button type="button" class="light-button" id="explore-button">
+                            Explore Lost & Found →
+                        </button>
+                    </div>
+
+                    <div class="welcome-decoration">
+                        <div class="orbit orbit-one"></div>
+                        <div class="orbit orbit-two"></div>
+                        <div class="orbit orbit-three"></div>
+                        <div class="center-symbol">CB</div>
+                    </div>
+                </div>
+
+
+                <!-- Unified platform overview -->
+                <section class="platform-overview">
+                    <div class="section-heading">
+                        <div>
+                            <h3>Platform at a glance</h3>
+                            <p>A live overview of all CampusBridge modules</p>
+                        </div>
+                        <button type="button" class="text-button" id="refresh-dashboard-button">↻ Refresh overview</button>
+                    </div>
+
+                    <div class="stats-grid">
+                        <article class="stat-card">
+                            <div class="stat-top"><span>Lost & Found reports</span><span class="stat-icon purple">▤</span></div>
+                            <h3 id="platform-item-reports">—</h3>
+                            <p>Submitted item reports</p>
+                        </article>
+                        <article class="stat-card">
+                            <div class="stat-top"><span>Campus issues</span><span class="stat-icon orange">🔧</span></div>
+                            <h3 id="platform-maintenance-reports">—</h3>
+                            <p>Maintenance reports submitted</p>
+                        </article>
+                        <article class="stat-card">
+                            <div class="stat-top"><span>Pending issues</span><span class="stat-icon blue">◷</span></div>
+                            <h3 id="platform-pending-issues">—</h3>
+                            <p>Awaiting action</p>
+                        </article>
+                        <article class="stat-card">
+                            <div class="stat-top"><span>Related issue pairs</span><span class="stat-icon purple">✧</span></div>
+                            <h3 id="platform-related-pairs">—</h3>
+                            <p>Suggested for human review</p>
+                        </article>
+                        <article class="stat-card">
+                            <div class="stat-top"><span>Available resources</span><span class="stat-icon green">⇄</span></div>
+                            <h3 id="platform-available-resources">—</h3>
+                            <p>Listed in this browser</p>
+                        </article>
+                    </div>
+
+                    <div class="quick-actions">
+                        <button type="button" class="secondary-button" id="dashboard-lost-found-action">+ Report lost/found item</button>
+                        <button type="button" class="secondary-button" id="dashboard-campus-issue-action">+ Report campus issue</button>
+                        <button type="button" class="secondary-button" id="dashboard-resource-action">+ Share a resource</button>
+                    </div>
+                    <p id="dashboard-overview-message" class="form-message" role="status"></p>
+                </section>
+
+                <div class="section-heading dashboard-subheading">
+                    <div>
+                        <h3>Lost & Found snapshot</h3>
+                        <p>More detailed item statistics and recent submissions</p>
+                    </div>
+                </div>
+
+                <!-- Lost & Found summary cards -->
+                <div class="stats-grid">
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Total reports</span>
+                            <span class="stat-icon purple">▤</span>
+                        </div>
+
+                        <h3 id="total-reports">0</h3>
+                        <p>All submitted item reports</p>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Lost items</span>
+                            <span class="stat-icon orange">⌕</span>
+                        </div>
+
+                        <h3 id="lost-count">0</h3>
+                        <p>Items reported as lost</p>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Found items</span>
+                            <span class="stat-icon green">✓</span>
+                        </div>
+
+                        <h3 id="found-count">0</h3>
+                        <p>Items reported as found</p>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Possible matches</span>
+                            <span class="stat-icon blue">✧</span>
+                        </div>
+
+                        <h3 id="match-count">—</h3>
+                        <p>Matching suggestions available</p>
+                    </article>
+
+                </div>
+
+
+                <!-- Recent reports -->
+                <section class="content-card">
+
+                    <div class="section-heading">
+                        <div>
+                            <h3>Recent reports</h3>
+                            <p>Latest lost and found submissions</p>
+                        </div>
+
+                        <button type="button" class="text-button" id="view-all-button">
+                            View all →
+                        </button>
+                    </div>
+
+                    <div id="recent-reports" class="reports-list">
+                        <div class="loading-message">
+                            Loading reports...
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <!-- How matching works -->
+                <section class="matching-banner">
+                    <div class="matching-symbol">✦</div>
+
+                    <div>
+                        <h3>Smart matching, transparent results.</h3>
+
+                        <p>
+                            CampusBridge compares item descriptions and provides
+                            possible matches for people to review.
+                        </p>
+                    </div>
+
+                    <button type="button" id="matching-button" class="secondary-button">
+                        Find matches →
+                    </button>
+                </section>
+
+            </section>
+
+
+            <!-- Lost and found page -->
+            <section id="lost-found-page" class="page">
+
+                <div class="page-intro">
+                    <h3>Lost something? Found something?</h3>
+
+                    <p>
+                        Submit a report and let CampusBridge help identify
+                        potentially related reports.
+                    </p>
+                </div>
+
+
+                <div class="two-column-layout">
+
+                    <!-- Report form -->
+                    <section class="content-card form-card">
+
+                        <div class="section-heading">
+                            <div>
+                                <h3>Submit an item report</h3>
+                                <p>Provide the details below</p>
+                            </div>
+                        </div>
+
+                        <form id="report-form">
+
+                            <label for="report-type">Report type</label>
+
+                            <select id="report-type" required>
+                                <option value="lost">I lost an item</option>
+                                <option value="found">I found an item</option>
+                            </select>
+
+
+                            <label for="item-name">Item name</label>
+
+                            <input type="text" id="item-name" placeholder="e.g. Laptop charger" minlength="2"
+                                maxlength="100" required>
+
+
+                            <label for="category">Category</label>
+
+                            <select id="category" required>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Books & Stationery">Books & Stationery</option>
+                                <option value="Clothing & Accessories">Clothing & Accessories</option>
+                                <option value="ID Cards & Documents">ID Cards & Documents</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+
+                            <label for="description">Description</label>
+
+                            <textarea id="description"
+                                placeholder="Describe the item, including identifying features..." minlength="5"
+                                maxlength="1000" rows="4" required></textarea>
+
+
+                            <label for="location">Location</label>
+
+                            <input type="text" id="location" placeholder="e.g. Central Library" minlength="2"
+                                maxlength="200" required>
+
+
+                            <label for="report-date">Date</label>
+
+                            <input type="date" id="report-date" required>
+
+                            <button type="submit" class="primary-button full-width">
+                                Submit report →
+                            </button>
+
+                            <p id="form-message" class="form-message" role="status"></p>
+
+                        </form>
+
+                    </section>
+
+
+                    <!-- Reports list -->
+                    <section class="content-card">
+
+                        <div class="section-heading">
+                            <div>
+                                <h3>Campus reports</h3>
+                                <p>Reports retrieved from the database</p>
+                            </div>
+
+                            <button type="button" class="text-button" id="refresh-button">
+                                ↻ Refresh
+                            </button>
+                        </div>
+
+                        <div id="all-reports" class="reports-list">
+                            <div class="loading-message">
+                                Loading reports...
+                            </div>
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- Match results -->
+                <section class="content-card matches-card">
+
+                    <div class="section-heading">
+                        <div>
+                            <h3>Possible matches</h3>
+                            <p>Review suggestions generated from report descriptions</p>
+                        </div>
+                    </div>
+
+                    <div id="match-results">
+                        <div class="empty-state">
+                            <div class="empty-icon">✧</div>
+                            <h3>Ready to find a match?</h3>
+                            <p>Select a report above and ask CampusBridge to find related reports.</p>
+                        </div>
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- Campus issues page -->
+            <section id="maintenance-page" class="page">
+
+                <div class="page-intro">
+                    <h3>Spot it. Report it. Get it fixed.</h3>
+
+                    <p>
+                        Discover recurring campus issues and help prioritize
+                        maintenance requests.
+                    </p>
+                </div>
+
+                <!-- Statistics -->
+                <div class="maintenance-stats">
+
+                    <div class="stat-card">
+                        <h3>Total reports</h3>
+                        <p id="total-maintenance-reports">0</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Pending</h3>
+                        <p id="pending-maintenance-issues">0</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>In progress</h3>
+                        <p id="in-progress-maintenance-issues">0</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Resolved</h3>
+                        <p id="resolved-maintenance-issues">0</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Related pairs</h3>
+                        <p id="related-issue-pairs">0</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>High priority</h3>
+                        <p id="high-priority-issues">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Resolution Rate</h3>
+                        <p id="maintenance-resolution-rate">0</p>
+                    </div>
+
+                </div>
+
+                <!-- Report form -->
+                <div class="maintenance-form-container">
+
+                    <h3>Report a campus issue</h3>
+
+                    <form id="maintenance-form">
+
+                        <div class="form-group">
+                            <label for="maintenance-title">Issue title</label>
+                            <input type="text" id="maintenance-title" placeholder="e.g. Wi-Fi not working" required
+                                minlength="3" maxlength="150">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maintenance-location">Location</label>
+                            <input type="text" id="maintenance-location" placeholder="e.g. Computer Lab" required
+                                minlength="2" maxlength="200">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maintenance-category">Category</label>
+                            <select id="maintenance-category" required>
+                                <option value="">Select a category</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Network">Network / Wi-Fi</option>
+                                <option value="Furniture">Furniture</option>
+                                <option value="Plumbing">Plumbing</option>
+                                <option value="Cleanliness">Cleanliness</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maintenance-severity">Severity</label>
+                            <select id="maintenance-severity" required>
+                                <option value="">Select severity</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-row">
+                            <label for="maintenance-description">Description</label>
+                            <textarea id="maintenance-description" placeholder="Describe the issue..." required
+                                minlength="5" maxlength="2000"></textarea>
+                        </div>
+
+                        <button type="submit" class="primary-button">Submit issue →</button>
+
+                        <p id="maintenance-form-message" class="form-message" role="status"></p>
+
+                    </form>
+
+                </div>
+
+                <!-- All reports -->
+                <div class="maintenance-reports-container">
+
+                    <h3>Reported campus issues</h3>
+
+                    <div id="maintenance-reports-list">
+                        <p>Loading campus issues...</p>
+                    </div>
+
+                </div>
+
+                <!-- Related issues -->
+                <div class="related-issues-container">
+
+                    <h3>Potentially related issues</h3>
+
+                    <p class="intelligence-note">
+                        These are algorithmically identified candidates, not
+                        confirmed duplicates. Human verification is required.
+                    </p>
+
+                    <div id="related-issues-list">
+                        <p>Analyzing campus reports...</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Campus Resource Exchange -->
+            <section id="resource-exchange-page" class="page">
+                <div class="page-intro">
+                    <h3>Share more. Waste less. Help each other.</h3>
+                    <p>Offer useful study and campus resources, or find something you need from fellow students.</p>
+                </div>
+
+                <div class="resource-exchange-grid">
+                    <section class="content-card resource-form-card">
+                        <div class="section-heading">
+                            <div>
+                                <h3>Share a resource</h3>
+                                <p>List an item, study material, or useful service.</p>
+                            </div>
+                        </div>
+                        <form id="resource-form">
+                            <label for="resource-title">Resource title</label>
+                            <input id="resource-title" type="text" minlength="3" maxlength="120"
+                                placeholder="e.g. First-year engineering notes" required>
+
+                            <label for="resource-category">Category</label>
+                            <select id="resource-category" required>
+                                <option value="">Choose a category</option>
+                                <option>Books & Notes</option>
+                                <option>Electronics</option>
+                                <option>Lab Equipment</option>
+                                <option>Stationery</option>
+                                <option>Events & Clubs</option>
+                                <option>Other</option>
+                            </select>
+
+                            <label for="resource-condition">Offering type</label>
+                            <select id="resource-condition" required>
+                                <option value="">Choose an offering type</option>
+                                <option value="lend">Available to lend</option>
+                                <option value="give">Giving away</option>
+                                <option value="share">Sharing information / link</option>
+                            </select>
+
+                            <label for="resource-location">Pickup location or context</label>
+                            <input id="resource-location" type="text" minlength="2" maxlength="160"
+                                placeholder="e.g. Library, Block 7" required>
+
+                            <label for="resource-description">Description and contact instructions</label>
+                            <textarea id="resource-description" minlength="5" maxlength="1000" rows="4"
+                                placeholder="Describe what is available and how interested students should connect."
+                                required></textarea>
+
+                            <button type="submit" class="primary-button full-width">Publish resource →</button>
+                            <p id="resource-form-message" class="form-message" role="status"></p>
+                        </form>
+                    </section>
+
+                    <section class="content-card resource-list-card">
+                        <div class="section-heading">
+                            <div>
+                                <h3>Community resources</h3>
+                                <p id="resource-count-label">Resources shared by students</p>
+                            </div>
+                        </div>
+                        <div class="resource-filters">
+                            <input id="resource-search" type="search" placeholder="Search resources..."
+                                aria-label="Search resources">
+                            <select id="resource-category-filter" aria-label="Filter by category">
+                                <option value="all">All categories</option>
+                                <option>Books & Notes</option>
+                                <option>Electronics</option>
+                                <option>Lab Equipment</option>
+                                <option>Stationery</option>
+                                <option>Events & Clubs</option>
+                                <option>Other</option>
+                            </select>
+                            <select id="resource-status-filter" aria-label="Filter by availability">
+                                <option value="available">Available only</option>
+                                <option value="all">All statuses</option>
+                            </select>
+                        </div>
+                        <div id="resource-list" class="resource-list" aria-live="polite">
+                            <div class="empty-state">
+                                <h3>No resources yet</h3>
+                                <p>Be the first to share something useful with your campus community.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="notice-box resource-storage-note">
+                    <strong>Prototype note:</strong> Resource listings are stored in this browser only. This version
+                    does not yet sync listings between students or devices. Do not post private contact details or
+                    sensitive information.
+                </div>
+            </section>
+
+            <!-- About page -->
+            <section id="about-page" class="page">
+
+                <div class="page-intro">
+                    <h3>Bridging people, resources, and information.</h3>
+
+                    <p>
+                        CampusBridge is a smart campus community and resource
+                        intelligence platform.
+                    </p>
+                </div>
+
+                <div class="about-grid">
+
+                    <article class="content-card about-card">
+                        <div class="about-icon">⌕</div>
+                        <h3>Smart Lost & Found</h3>
+                        <p>
+                            Compare item reports and suggest possible matches
+                            using transparent text-similarity scoring.
+                        </p>
+                        <span class="feature-status">WORKING PROTOTYPE</span>
+                    </article>
+
+                    <article class="content-card about-card">
+                        <div class="about-icon">▦</div>
+
+                        <h3>Campus Issue Intelligence</h3>
+
+                        <p>
+                            A rule-based intelligence system that identifies potentially
+                            related maintenance reports
+                            . It provides explainable suggestions
+                            to help campus authorities review and prioritize issues.
+                        </p>
+
+                        <span class="feature-status">IN DEVELOPMENT</span>
+                    </article>
+
+                    <article class="content-card about-card">
+                        <div class="about-icon">⇄</div>
+
+                        <h3>Campus Resource Exchange</h3>
+
+                        <p>
+                            A resource-sharing platform that enables students
+                            to list, discover, search, and manage campus resources.
+                            
+                        </p>
+
+                        <span class="feature-status">WORKING PROTOTYPE</span>
+                    </article>
+
+                    <article class="content-card about-card">
+                        <div class="about-icon">✦</div>
+                        <h3>Explainable suggestions</h3>
+                        <p>
+                            Understand why reports were suggested as potential
+                            matches before a person verifies them.
+                        </p>
+                        <span class="feature-status">WORKING PROTOTYPE</span>
+                    </article>
+
+                </div>
+
+                <div class="notice-box">
+                    <strong>Important:</strong>
+                    A matching score is a similarity estimate, not proof that
+                    two reports refer to the same item. Human verification
+                    remains necessary.
+                </div>
+
+            </section>
+
+            <footer class="footer">
+                CampusBridge · Smart Campus Community & Resource Intelligence
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
